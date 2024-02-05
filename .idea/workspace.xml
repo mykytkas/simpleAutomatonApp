@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="76fbf929-07eb-432e-991a-2d9feda06311" name="Changes" comment="added second stage but only as a fxml and controller to it">
+    <list default="true" id="76fbf929-07eb-432e-991a-2d9feda06311" name="Changes" comment="encodings update(no clue)">
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/HelloController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -53,7 +53,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1707142805973</updated>
-      <workItem from="1707142806973" duration="591000" />
+      <workItem from="1707142806973" duration="1544000" />
     </task>
     <task id="LOCAL-00001" summary="initialized a project + changed starting fxml">
       <option name="closed" value="true" />
@@ -71,7 +71,23 @@
       <option name="project" value="LOCAL" />
       <updated>1707143226252</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="added second stage">
+      <option name="closed" value="true" />
+      <created>1707143471551</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1707143471551</updated>
+    </task>
+    <task id="LOCAL-00004" summary="encodings update(no clue)">
+      <option name="closed" value="true" />
+      <created>1707143501543</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1707143501543</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -80,6 +96,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initialized a project + changed starting fxml" />
     <MESSAGE value="added second stage but only as a fxml and controller to it" />
-    <option name="LAST_COMMIT_MESSAGE" value="added second stage but only as a fxml and controller to it" />
+    <MESSAGE value="added second stage" />
+    <MESSAGE value="encodings update(no clue)" />
+    <option name="LAST_COMMIT_MESSAGE" value="encodings update(no clue)" />
   </component>
 </project>
