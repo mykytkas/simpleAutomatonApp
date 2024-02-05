@@ -12,6 +12,6 @@
     </padding>
 
     <Label fx:id="welcomeText" prefHeight="28.0" prefWidth="171.0" text="choose a number of nodes" />
-   <Slider blockIncrement="1.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="1" snapToTicks="true" />
-    <Button onAction="#onHelloButtonClick" text="next" />
+   <Slider fx:id="slider" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="1" snapToTicks="true" />
+    <Button fx:id="button" onAction="#onHelloButtonClick" text="next" />
 </VBox>
