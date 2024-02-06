@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="76fbf929-07eb-432e-991a-2d9feda06311" name="Changes" comment="changed how new stage spawns">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/AutomatonView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/AutomatonView.java" afterDir="false" />
+    <list default="true" id="76fbf929-07eb-432e-991a-2d9feda06311" name="Changes" comment="automaton stage now recieves an input">
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/HelloController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo1/automaton-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo1/automaton-view.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo1/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo1/hello-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -56,7 +54,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1707142805973</updated>
-      <workItem from="1707142806973" duration="3086000" />
+      <workItem from="1707142806973" duration="5664000" />
     </task>
     <task id="LOCAL-00001" summary="initialized a project + changed starting fxml">
       <option name="closed" value="true" />
@@ -98,7 +96,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707147460452</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="automaton stage now recieves an input">
+      <option name="closed" value="true" />
+      <created>1707149772446</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1707149772446</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -110,6 +116,7 @@
     <MESSAGE value="added second stage" />
     <MESSAGE value="encodings update(no clue)" />
     <MESSAGE value="changed how new stage spawns" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed how new stage spawns" />
+    <MESSAGE value="automaton stage now recieves an input" />
+    <option name="LAST_COMMIT_MESSAGE" value="automaton stage now recieves an input" />
   </component>
 </project>
