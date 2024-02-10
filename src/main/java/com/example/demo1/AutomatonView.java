@@ -34,15 +34,15 @@ public class AutomatonView {
     private AnchorPane pane;
 
     private ArrayList<Circle> circles = new ArrayList<>();
-    int oldX = 165;
-    int oldY;
-    int radius = 40;
+    private int oldX = 165;
+    private int oldY;
+    final private int radius = 25;
     public void displayCircles(int number){
 
         for (int i = 0; i < number; i++) {
             Circle circle = new Circle();
-            circle.setCenterX(60*i + radius);
-            circle.setCenterY(60*i + radius);
+            circle.setCenterX(150*Math.cos((i+1)*2*Math.PI/number) + pane.getPrefWidth()/2);
+            circle.setCenterY(150*Math.sin((i+1)*2*Math.PI/number) + pane.getPrefHeight()/2);
             circle.setRadius(radius);
             //circle.setOnMouseClicked(this::onRightClick);
             circle.setOnMouseDragged(this::onMouseDragged);
