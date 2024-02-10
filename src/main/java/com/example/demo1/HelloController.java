@@ -50,10 +50,10 @@ public class HelloController implements Initializable {
     protected void onHelloButtonClick(ActionEvent event) throws IOException {
         number = (int)slider.getValue();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("automaton-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("automaton-view2.fxml"));
         root = loader.load();
         AutomatonView automatonView = loader.getController();
-        automatonView.displayNumber(number);
+        automatonView.displayCircles(number);
 
         //Parent root = FXMLLoader.load(getClass().getResource("automaton-view.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
