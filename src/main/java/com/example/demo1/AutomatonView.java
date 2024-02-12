@@ -39,6 +39,7 @@ public class AutomatonView {
     @FXML
     private AnchorPane pane;
 
+    private FiniteAutomata automata;
     private ArrayList<Circle> circles = new ArrayList<>();
     private ArrayList<idCurve> curves = new ArrayList<>();
     private ArrayList<idLabel> labels = new ArrayList<>();
@@ -51,8 +52,11 @@ public class AutomatonView {
         this.number = number;
         oldX = (int)pane.getLayoutX();
 
+        automata = new DeterministicFiniteAutomata();
         for (int i = 0; i < number; i++) {
             drawCircle(i);
+            if(i == 0) automata.addVertex(true, false, String.valueOf(i));
+            else automata.addVertex(false, true, String.valueOf(i));
         }
         for (int i = 0; i < circles.size(); i++){
             choiceTo.getItems().add(i);
@@ -74,36 +78,12 @@ public class AutomatonView {
         xTo = (int)circles.get(idTo).getCenterX();
         yTo = (int)circles.get(idTo).getCenterY();
 
-        //add idCurve
-        idCurve curve = new idCurve();
-        curve.setIdFrom(idFrom);
-        curve.setIdTo(idTo);
-
-        curve.setStartX(xFrom);
-        curve.setStartY(yFrom);
-        curve.setEndX(xTo);
-        curve.setEndY(yTo);
-        curve.setFill(Color.TRANSPARENT);
-        curve.setStroke(Color.BLACK);
-        curve.setStrokeWidth(1.5);
-        curve.setViewOrder(pane.getChildren().size());
-        curve.setControlX(controlPointX(xFrom, xTo, yFrom, yTo, 1, -1));
-        curve.setControlY(controlPointY(xFrom, xTo, yFrom, yTo, 1, +1));
-
-        curves.add(curve);
-        pane.getChildren().add(curve);
-
         //remove duplicates in accepted chars of transition
         String chars = removeDuplicates(charsField.getText());
-        //add label
-        idLabel label = new idLabel();
-        label.setIdFrom(idFrom);
-        label.setIdTo(idTo);
-        label.setText(chars);
-        label.setLayoutX(controlPointX(xFrom, xTo, yFrom, yTo, 1.5, -1));
-        label.setLayoutY(controlPointY(xFrom, xTo, yFrom, yTo, 1.5, +1));
-        labels.add(label);
-        pane.getChildren().add(label);
+        drawCurve(xFrom, xTo, yFrom, yTo, idFrom, idTo, chars);
+
+        automata.getVertexById(idFrom).addEdge(idTo, chars);
+
 
     }
 
@@ -183,6 +163,36 @@ public class AutomatonView {
         label.setId(String.valueOf(i));
         label.setDisable(true);
         circleLabels.add(label);
+        pane.getChildren().add(label);
+    }
+    private void drawCurve(int xFrom, int xTo,int yFrom, int yTo, int idFrom, int idTo, String chars){
+        //add idCurve
+        idCurve curve = new idCurve();
+        curve.setIdFrom(idFrom);
+        curve.setIdTo(idTo);
+
+        curve.setStartX(xFrom);
+        curve.setStartY(yFrom);
+        curve.setEndX(xTo);
+        curve.setEndY(yTo);
+        curve.setFill(Color.TRANSPARENT);
+        curve.setStroke(Color.BLACK);
+        curve.setStrokeWidth(1.5);
+        curve.setViewOrder(pane.getChildren().size());
+        curve.setControlX(controlPointX(xFrom, xTo, yFrom, yTo, 1, +1));
+        curve.setControlY(controlPointY(xFrom, xTo, yFrom, yTo, 1, -1));
+
+        curves.add(curve);
+        pane.getChildren().add(curve);
+
+        //add label
+        idLabel label = new idLabel();
+        label.setIdFrom(idFrom);
+        label.setIdTo(idTo);
+        label.setText(chars);
+        label.setLayoutX(controlPointX(xFrom, xTo, yFrom, yTo, 1.5, +1));
+        label.setLayoutY(controlPointY(xFrom, xTo, yFrom, yTo, 1.5, -1));
+        labels.add(label);
         pane.getChildren().add(label);
     }
     //control point Methods are the same operation, they are separated for the sake of comfort
