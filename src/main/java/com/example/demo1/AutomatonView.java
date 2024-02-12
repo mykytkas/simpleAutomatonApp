@@ -13,6 +13,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.QuadCurve;
+import javafx.scene.text.Font;
 
 import java.util.ArrayList;
 
@@ -41,6 +42,7 @@ public class AutomatonView {
     private ArrayList<Circle> circles = new ArrayList<>();
     private ArrayList<idCurve> curves = new ArrayList<>();
     private ArrayList<idLabel> labels = new ArrayList<>();
+    private ArrayList<Label> circleLabels = new ArrayList<>();
     private int oldX;
     private int oldY;
     final private int radius = 25;
@@ -51,8 +53,10 @@ public class AutomatonView {
 
         for (int i = 0; i < number; i++) {
             Circle circle = new Circle();
-            circle.setCenterX(150*Math.cos((i+1)*2*Math.PI/number) + pane.getPrefWidth()/2);
-            circle.setCenterY(150*Math.sin((i+1)*2*Math.PI/number) + pane.getPrefHeight()/2);
+            double x = 150*Math.cos((i+1)*2*Math.PI/number) + pane.getPrefWidth()/2;
+            double y = 150*Math.sin((i+1)*2*Math.PI/number) + pane.getPrefHeight()/2;
+            circle.setCenterX(x);
+            circle.setCenterY(y);
             circle.setRadius(radius);
             circle.setId(String.valueOf(i));
             circle.setFill(Color.WHITE);
@@ -62,6 +66,17 @@ public class AutomatonView {
             circle.setOnMouseDragged(this::onMouseDragged);
             circles.add(circle);
             pane.getChildren().add(circle);
+
+            Label label = new Label();
+            label.setText(String.valueOf(i));
+            label.setFont(Font.font(20));
+            label.setLayoutX(x-radius/5);
+            label.setLayoutY(y-radius/2);
+            label.setId(String.valueOf(i));
+            label.setDisable(true);
+            circleLabels.add(label);
+            pane.getChildren().add(label);
+
         }
         for (int i = 0; i < circles.size(); i++){
             choiceTo.getItems().add(i);
@@ -143,7 +158,7 @@ public class AutomatonView {
                 curve.setControlY(controlPointY(curve.getStartX(), x, curve.getStartY(), y, 1, 1));
             }
         }
-        //move attached label
+        //move curve - label
         for (idLabel label : labels){
             if (label.getIdFrom() == Integer.parseInt(((Circle)event.getSource()).getId())){
                 double xTo = circles.get(label.getIdTo()).getCenterX();
@@ -156,6 +171,14 @@ public class AutomatonView {
                 label.setLayoutX(controlPointX(xFrom, x, yFrom, y, 1.5, -1));
                 label.setLayoutY(controlPointY(xFrom, x, yFrom, y, 1.5, 1));
             }
+        }
+        //move circle label
+        for (Label label : circleLabels){
+            if (label.getId().equals(((Circle)event.getSource()).getId())){
+                label.setLayoutX(x-radius/5);
+                label.setLayoutY(y-radius/2);
+            }
+
         }
 
     }
