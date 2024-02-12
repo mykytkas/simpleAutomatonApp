@@ -2,10 +2,7 @@ package com.example.demo1;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -139,6 +136,17 @@ public class AutomatonView {
 
     }
 
+    @FXML
+    protected void checkString(ActionEvent event){
+        String input = stringField.getText();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        if (automata.isAcceptableString(input)){
+            alert.setHeaderText("could be accepted");
+        }else{
+            alert.setHeaderText("could not be accepted");
+        }
+        alert.show();
+    }
     private void drawCircle(int i){
         Circle circle = new Circle();
         double x = 150*Math.cos((i+1)*2*Math.PI/number) + pane.getPrefWidth()/2;
