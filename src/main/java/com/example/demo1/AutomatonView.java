@@ -117,15 +117,15 @@ public class AutomatonView {
         curves.add(curve);
         pane.getChildren().add(curve);
 
+        //remove duplicates in accepted chars of transition
+        String chars = removeDuplicates(charsField.getText());
         //add label
         idLabel label = new idLabel();
         label.setIdFrom(idFrom);
         label.setIdTo(idTo);
-        label.setText(charsField.getText());
+        label.setText(chars);
         label.setLayoutX(controlPointX(xFrom, xTo, yFrom, yTo, 1.5, -1));
         label.setLayoutY(controlPointY(xFrom, xTo, yFrom, yTo, 1.5, +1));
-
-
         labels.add(label);
         pane.getChildren().add(label);
 
@@ -190,7 +190,17 @@ public class AutomatonView {
     private double controlPointY(double xFrom, double xTo, double yFrom, double yTo, double labelFactor, int sign){
         return (yTo+yFrom)/2 + radius*labelFactor*sign*(xTo-xFrom + 0.0)/Math.sqrt(xTo*xTo + xFrom*xFrom);
     }
-
+    private String removeDuplicates(String input){
+        String out = "";
+        for (char c : input.toCharArray()){
+            boolean shouldAdd = true;
+            for (char o : out.toCharArray()){
+                if(c == o) shouldAdd = false;
+            }
+            if(shouldAdd) out = out + c;
+        }
+        return out;
+    }
 
 }
 

@@ -4,13 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="76fbf929-07eb-432e-991a-2d9feda06311" name="Changes" comment="made labels for circles">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/DeterministicFiniteAutomata.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/Edge.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/FiniteAutomata.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/Vertex.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/NonDeterministicFiniteAutomata.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/NonDeterministicFiniteAutomata.java" afterDir="false" />
+    <list default="true" id="76fbf929-07eb-432e-991a-2d9feda06311" name="Changes" comment="copied FiniteAutomata from my other project">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/AutomatonView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/AutomatonView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,19 +50,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.demo1.HelloApplication" />
@@ -99,7 +95,7 @@
       <workItem from="1707142806973" duration="8849000" />
       <workItem from="1707478453205" duration="1761000" />
       <workItem from="1707483152785" duration="320000" />
-      <workItem from="1707483744099" duration="23364000" />
+      <workItem from="1707483744099" duration="24117000" />
     </task>
     <task id="LOCAL-00001" summary="initialized a project + changed starting fxml">
       <option name="closed" value="true" />
@@ -213,7 +209,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707748732952</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="copied FiniteAutomata from my other project">
+      <option name="closed" value="true" />
+      <created>1707756793720</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1707756793720</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -245,6 +249,7 @@
     <MESSAGE value="made labels follow the translation of circles" />
     <MESSAGE value="made labels for circels" />
     <MESSAGE value="made labels for circles" />
-    <option name="LAST_COMMIT_MESSAGE" value="made labels for circles" />
+    <MESSAGE value="copied FiniteAutomata from my other project" />
+    <option name="LAST_COMMIT_MESSAGE" value="copied FiniteAutomata from my other project" />
   </component>
 </project>
