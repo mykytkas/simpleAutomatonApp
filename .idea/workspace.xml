@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="76fbf929-07eb-432e-991a-2d9feda06311" name="Changes" comment="made labels follow the translation of circles">
+    <list default="true" id="76fbf929-07eb-432e-991a-2d9feda06311" name="Changes" comment="made labels for circles">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/DeterministicFiniteAutomata.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/Edge.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/FiniteAutomata.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/Vertex.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/AutomatonView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/AutomatonView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/NonDeterministicFiniteAutomata.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/NonDeterministicFiniteAutomata.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +21,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -94,7 +99,7 @@
       <workItem from="1707142806973" duration="8849000" />
       <workItem from="1707478453205" duration="1761000" />
       <workItem from="1707483152785" duration="320000" />
-      <workItem from="1707483744099" duration="21921000" />
+      <workItem from="1707483744099" duration="23364000" />
     </task>
     <task id="LOCAL-00001" summary="initialized a project + changed starting fxml">
       <option name="closed" value="true" />
@@ -192,7 +197,23 @@
       <option name="project" value="LOCAL" />
       <updated>1707747402680</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="made labels for circels">
+      <option name="closed" value="true" />
+      <created>1707748689717</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1707748689717</updated>
+    </task>
+    <task id="LOCAL-00014" summary="made labels for circles">
+      <option name="closed" value="true" />
+      <created>1707748732952</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1707748732952</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -222,6 +243,8 @@
     <MESSAGE value="Big commit&#10;&#10;added functionality to addEdge button now adds custom QuadCurve to nodes&#10;added anchoring* of curves on circles when dragged" />
     <MESSAGE value="made circles have white background and black border" />
     <MESSAGE value="made labels follow the translation of circles" />
-    <option name="LAST_COMMIT_MESSAGE" value="made labels follow the translation of circles" />
+    <MESSAGE value="made labels for circels" />
+    <MESSAGE value="made labels for circles" />
+    <option name="LAST_COMMIT_MESSAGE" value="made labels for circles" />
   </component>
 </project>
