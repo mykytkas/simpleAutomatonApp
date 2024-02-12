@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="76fbf929-07eb-432e-991a-2d9feda06311" name="Changes" comment="AutomatonView big update&#10;&#10;created new fxml, that should be enough to hold controls and graph of automaton&#10;implemented AutomatonView.displayCircles() method that creates n circles as the fxml loads&#10;implemented AutomatonView.onMouseDragged() method that allows circles of graph to be freely moved in space">
+    <list default="true" id="76fbf929-07eb-432e-991a-2d9feda06311" name="Changes" comment="added an automatic positioning for circles">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/AutomatonView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/AutomatonView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo1/automaton-view2.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo1/automaton-view2.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,6 +64,26 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RunManager">
+    <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.demo1.HelloApplication" />
+      <module name="demo1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.demo1.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.HelloApplication" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -74,7 +95,7 @@
       <workItem from="1707142806973" duration="8849000" />
       <workItem from="1707478453205" duration="1761000" />
       <workItem from="1707483152785" duration="320000" />
-      <workItem from="1707483744099" duration="5165000" />
+      <workItem from="1707483744099" duration="16685000" />
     </task>
     <task id="LOCAL-00001" summary="initialized a project + changed starting fxml">
       <option name="closed" value="true" />
@@ -140,7 +161,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707573022497</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="added an automatic positioning for circles">
+      <option name="closed" value="true" />
+      <created>1707585682021</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1707585682021</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -166,17 +195,7 @@
     <MESSAGE value="automaton stage now recieves an input" />
     <MESSAGE value="added listener and scale to slider" />
     <MESSAGE value="AutomatonView big update&#10;&#10;created new fxml, that should be enough to hold controls and graph of automaton&#10;implemented AutomatonView.displayCircles() method that creates n circles as the fxml loads&#10;implemented AutomatonView.onMouseDragged() method that allows circles of graph to be freely moved in space" />
-    <option name="LAST_COMMIT_MESSAGE" value="AutomatonView big update&#10;&#10;created new fxml, that should be enough to hold controls and graph of automaton&#10;implemented AutomatonView.displayCircles() method that creates n circles as the fxml loads&#10;implemented AutomatonView.onMouseDragged() method that allows circles of graph to be freely moved in space" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/demo1/AutomatonView.java</url>
-          <line>49</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="added an automatic positioning for circles" />
+    <option name="LAST_COMMIT_MESSAGE" value="added an automatic positioning for circles" />
   </component>
 </project>
