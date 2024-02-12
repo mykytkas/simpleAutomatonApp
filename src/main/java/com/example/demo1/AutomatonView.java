@@ -102,13 +102,13 @@ public class AutomatonView {
             if (curve.getIdFrom() == Integer.parseInt(((Circle)event.getSource()).getId())){
                 curve.setStartX(x);
                 curve.setStartY(y);
-                curve.setControlX(controlPointX(x, curve.getEndX(), y, curve.getEndY(),1,-1));
-                curve.setControlY(controlPointY(x, curve.getEndX(), y, curve.getEndY(),1,1));
+                curve.setControlX(controlPointX(x, curve.getEndX(), y, curve.getEndY(),1,+1));
+                curve.setControlY(controlPointY(x, curve.getEndX(), y, curve.getEndY(),1,-1));
             }else if (curve.getIdTo() == Integer.parseInt(((Circle)event.getSource()).getId())){
                 curve.setEndX(x);
                 curve.setEndY(y);
-                curve.setControlX(controlPointX(curve.getStartX(), x, curve.getStartY(), y, 1, -1));
-                curve.setControlY(controlPointY(curve.getStartX(), x, curve.getStartY(), y, 1, 1));
+                curve.setControlX(controlPointX(curve.getStartX(), x, curve.getStartY(), y, 1, +1));
+                curve.setControlY(controlPointY(curve.getStartX(), x, curve.getStartY(), y, 1, -1));
             }
         }
         //move curve - label
@@ -116,13 +116,13 @@ public class AutomatonView {
             if (label.getIdFrom() == Integer.parseInt(((Circle)event.getSource()).getId())){
                 double xTo = circles.get(label.getIdTo()).getCenterX();
                 double yTo = circles.get(label.getIdTo()).getCenterY();
-                label.setLayoutX(controlPointX(x, xTo, y, yTo, 1.5, -1));
-                label.setLayoutY(controlPointY(x, xTo, y, yTo, 1.5, 1));
+                label.setLayoutX(controlPointX(x, xTo, y, yTo, 1.5, +1));
+                label.setLayoutY(controlPointY(x, xTo, y, yTo, 1.5, -1));
             }else if (label.getIdTo() == Integer.parseInt(((Circle)event.getSource()).getId())){
                 double xFrom = circles.get(label.getIdFrom()).getCenterX();
                 double yFrom = circles.get(label.getIdFrom()).getCenterY();
-                label.setLayoutX(controlPointX(xFrom, x, yFrom, y, 1.5, -1));
-                label.setLayoutY(controlPointY(xFrom, x, yFrom, y, 1.5, 1));
+                label.setLayoutX(controlPointX(xFrom, x, yFrom, y, 1.5, +1));
+                label.setLayoutY(controlPointY(xFrom, x, yFrom, y, 1.5, -1));
             }
         }
         //move circle label
