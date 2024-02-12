@@ -40,6 +40,7 @@ public class AutomatonView {
 
     private ArrayList<Circle> circles = new ArrayList<>();
     private ArrayList<idCurve> curves = new ArrayList<>();
+    private ArrayList<idLabel> labels = new ArrayList<>();
     private int oldX;
     private int oldY;
     final private int radius = 25;
@@ -82,6 +83,7 @@ public class AutomatonView {
         xTo = (int)circles.get(idTo).getCenterX();
         yTo = (int)circles.get(idTo).getCenterY();
 
+        //add idCurve
         idCurve curve = new idCurve();
         curve.setIdFrom(idFrom);
         curve.setIdTo(idTo);
@@ -94,17 +96,29 @@ public class AutomatonView {
         curve.setStroke(Color.BLACK);
         curve.setStrokeWidth(1.5);
         curve.setViewOrder(pane.getChildren().size());
-        curve.setControlX((xTo+xFrom)/2 + radius*(-1)*(yTo-yFrom + 0.0)/Math.sqrt(yTo*yTo + yFrom*yFrom));
-        curve.setControlY((yTo+yFrom)/2 + radius*(+1)*(xTo-xFrom + 0.0)/Math.sqrt(xTo*xTo + xFrom*xFrom));
+        curve.setControlX(controlPointX(xFrom, xTo, yFrom, yTo, 1, -1));
+        curve.setControlY(controlPointY(xFrom, xTo, yFrom, yTo, 1, +1));
 
         curves.add(curve);
         pane.getChildren().add(curve);
+
+        //add label
+        idLabel label = new idLabel();
+        label.setIdFrom(idFrom);
+        label.setIdTo(idTo);
+        label.setText(charsField.getText());
+        label.setLayoutX(controlPointX(xFrom, xTo, yFrom, yTo, 1.5, -1));
+        label.setLayoutY(controlPointY(xFrom, xTo, yFrom, yTo, 1.5, +1));
+
+
+        labels.add(label);
+        pane.getChildren().add(label);
 
     }
 
     @FXML
     protected void onMouseDragged(MouseEvent event) {
-
+        //move circles
         int x = (int)event.getSceneX() - oldX;
         if (event.getSceneX() < pane.getPrefWidth() + pane.getLayoutX() - radius && event.getSceneX() > pane.getLayoutX() + radius){
             ((Circle)event.getSource()).setCenterX(x);
@@ -115,30 +129,51 @@ public class AutomatonView {
             ((Circle)event.getSource()).setCenterY(y);
 
         }
-
+        //move attached curves
         for (idCurve curve : curves){
-            if (curve.idFrom == Integer.parseInt(((Circle)event.getSource()).getId())){
+            if (curve.getIdFrom() == Integer.parseInt(((Circle)event.getSource()).getId())){
                 curve.setStartX(x);
                 curve.setStartY(y);
-                curve.setControlX((curve.getEndX()+x)/2 + radius*(-1)*(curve.getEndY()-y + 0.0)/Math.sqrt(curve.getEndY()*curve.getEndY() + y*y));
-                curve.setControlY((curve.getEndY()+y)/2 + radius*(+1)*(curve.getEndX()-x + 0.0)/Math.sqrt(curve.getEndX()*curve.getEndX() + x*x));
-            }else if (curve.idTo == Integer.parseInt(((Circle)event.getSource()).getId())){
+                curve.setControlX(controlPointX(x, curve.getEndX(), y, curve.getEndY(),1,-1));
+                curve.setControlY(controlPointY(x, curve.getEndX(), y, curve.getEndY(),1,1));
+            }else if (curve.getIdTo() == Integer.parseInt(((Circle)event.getSource()).getId())){
                 curve.setEndX(x);
                 curve.setEndY(y);
-                curve.setControlX((x+curve.getStartX())/2 + radius*(-1)*(y-curve.getStartY() + 0.0)/Math.sqrt(y*y + curve.getStartY()*curve.getStartY()));
-                curve.setControlY((y+curve.getStartY())/2 + radius*(+1)*(x-curve.getStartX() + 0.0)/Math.sqrt(x*x + curve.getStartX()*curve.getStartX()));
+                curve.setControlX(controlPointX(curve.getStartX(), x, curve.getStartY(), y, 1, -1));
+                curve.setControlY(controlPointY(curve.getStartX(), x, curve.getStartY(), y, 1, 1));
             }
         }
+        //move attached label
+        for (idLabel label : labels){
+            if (label.getIdFrom() == Integer.parseInt(((Circle)event.getSource()).getId())){
+                double xTo = circles.get(label.getIdTo()).getCenterX();
+                double yTo = circles.get(label.getIdTo()).getCenterY();
+                label.setLayoutX(controlPointX(x, xTo, y, yTo, 1.5, -1));
+                label.setLayoutY(controlPointY(x, xTo, y, yTo, 1.5, 1));
+            }else if (label.getIdTo() == Integer.parseInt(((Circle)event.getSource()).getId())){
+                double xFrom = circles.get(label.getIdFrom()).getCenterX();
+                double yFrom = circles.get(label.getIdFrom()).getCenterY();
+                label.setLayoutX(controlPointX(xFrom, x, yFrom, y, 1.5, -1));
+                label.setLayoutY(controlPointY(xFrom, x, yFrom, y, 1.5, 1));
+            }
+        }
+
     }
 
-
+    //control point Methods are the same operation, they are separated for the sake of comfort
+    private double controlPointX(double xFrom, double xTo, double yFrom, double yTo, double labelFactor, int sign){
+        return (xTo+xFrom)/2 + radius*labelFactor*sign*(yTo-yFrom)/Math.sqrt(yTo*yTo + yFrom*yFrom);
+    }
+    private double controlPointY(double xFrom, double xTo, double yFrom, double yTo, double labelFactor, int sign){
+        return (yTo+yFrom)/2 + radius*labelFactor*sign*(xTo-xFrom + 0.0)/Math.sqrt(xTo*xTo + xFrom*xFrom);
+    }
 
 
 }
 
 class idCurve extends QuadCurve{
-    int idTo;
-    int idFrom;
+    private int idTo;
+    private int idFrom;
 
     public int getIdTo() {
         return idTo;
@@ -154,5 +189,25 @@ class idCurve extends QuadCurve{
 
     public void setIdFrom(int idFrom) {
         this.idFrom = idFrom;
+    }
+}
+class idLabel extends Label{
+    private int idFrom;
+    private int idTo;
+
+    public int getIdFrom() {
+        return idFrom;
+    }
+
+    public void setIdFrom(int idFrom) {
+        this.idFrom = idFrom;
+    }
+
+    public int getIdTo() {
+        return idTo;
+    }
+
+    public void setIdTo(int idTo) {
+        this.idTo = idTo;
     }
 }
