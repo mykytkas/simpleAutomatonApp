@@ -54,6 +54,9 @@ public class AutomatonView {
             circle.setCenterY(150*Math.sin((i+1)*2*Math.PI/number) + pane.getPrefHeight()/2);
             circle.setRadius(radius);
             circle.setId(String.valueOf(i));
+            circle.setFill(Color.WHITE);
+            circle.setStroke(Color.BLACK);
+            circle.setStrokeWidth(2);
             //circle.setOnMouseClicked(this::onRightClick);
             circle.setOnMouseDragged(this::onMouseDragged);
             circles.add(circle);
@@ -87,8 +90,10 @@ public class AutomatonView {
         curve.setStartY(yFrom);
         curve.setEndX(xTo);
         curve.setEndY(yTo);
-        curve.setFill(new Color(0.0,0.0,1.0,0.0));
-        curve.setStroke(new Color(0,0,0,1));
+        curve.setFill(Color.TRANSPARENT);
+        curve.setStroke(Color.BLACK);
+        curve.setStrokeWidth(1.5);
+        curve.setViewOrder(pane.getChildren().size());
         curve.setControlX((xTo+xFrom)/2 + radius*(-1)*(yTo-yFrom + 0.0)/Math.sqrt(yTo*yTo + yFrom*yFrom));
         curve.setControlY((yTo+yFrom)/2 + radius*(+1)*(xTo-xFrom + 0.0)/Math.sqrt(xTo*xTo + xFrom*xFrom));
 

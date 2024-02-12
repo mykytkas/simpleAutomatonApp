@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="76fbf929-07eb-432e-991a-2d9feda06311" name="Changes" comment="added an automatic positioning for circles">
+    <list default="true" id="76fbf929-07eb-432e-991a-2d9feda06311" name="Changes" comment="Big commit&#10;&#10;added functionality to addEdge button now adds custom QuadCurve to nodes&#10;added anchoring* of curves on circles when dragged">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/AutomatonView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/AutomatonView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/demo1/automaton-view2.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/demo1/automaton-view2.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +94,7 @@
       <workItem from="1707142806973" duration="8849000" />
       <workItem from="1707478453205" duration="1761000" />
       <workItem from="1707483152785" duration="320000" />
-      <workItem from="1707483744099" duration="16685000" />
+      <workItem from="1707483744099" duration="17583000" />
     </task>
     <task id="LOCAL-00001" summary="initialized a project + changed starting fxml">
       <option name="closed" value="true" />
@@ -169,7 +168,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707585682021</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Big commit&#10;&#10;added functionality to addEdge button now adds custom QuadCurve to nodes&#10;added anchoring* of curves on circles when dragged">
+      <option name="closed" value="true" />
+      <created>1707743503000</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1707743503000</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -196,6 +203,7 @@
     <MESSAGE value="added listener and scale to slider" />
     <MESSAGE value="AutomatonView big update&#10;&#10;created new fxml, that should be enough to hold controls and graph of automaton&#10;implemented AutomatonView.displayCircles() method that creates n circles as the fxml loads&#10;implemented AutomatonView.onMouseDragged() method that allows circles of graph to be freely moved in space" />
     <MESSAGE value="added an automatic positioning for circles" />
-    <option name="LAST_COMMIT_MESSAGE" value="added an automatic positioning for circles" />
+    <MESSAGE value="Big commit&#10;&#10;added functionality to addEdge button now adds custom QuadCurve to nodes&#10;added anchoring* of curves on circles when dragged" />
+    <option name="LAST_COMMIT_MESSAGE" value="Big commit&#10;&#10;added functionality to addEdge button now adds custom QuadCurve to nodes&#10;added anchoring* of curves on circles when dragged" />
   </component>
 </project>
