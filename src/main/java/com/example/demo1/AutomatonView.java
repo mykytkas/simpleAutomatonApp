@@ -52,31 +52,7 @@ public class AutomatonView {
         oldX = (int)pane.getLayoutX();
 
         for (int i = 0; i < number; i++) {
-            Circle circle = new Circle();
-            double x = 150*Math.cos((i+1)*2*Math.PI/number) + pane.getPrefWidth()/2;
-            double y = 150*Math.sin((i+1)*2*Math.PI/number) + pane.getPrefHeight()/2;
-            circle.setCenterX(x);
-            circle.setCenterY(y);
-            circle.setRadius(radius);
-            circle.setId(String.valueOf(i));
-            circle.setFill(Color.WHITE);
-            circle.setStroke(Color.BLACK);
-            circle.setStrokeWidth(2);
-            //circle.setOnMouseClicked(this::onRightClick);
-            circle.setOnMouseDragged(this::onMouseDragged);
-            circles.add(circle);
-            pane.getChildren().add(circle);
-
-            Label label = new Label();
-            label.setText(String.valueOf(i));
-            label.setFont(Font.font(20));
-            label.setLayoutX(x-radius/5);
-            label.setLayoutY(y-radius/2);
-            label.setId(String.valueOf(i));
-            label.setDisable(true);
-            circleLabels.add(label);
-            pane.getChildren().add(label);
-
+            drawCircle(i);
         }
         for (int i = 0; i < circles.size(); i++){
             choiceTo.getItems().add(i);
@@ -183,6 +159,32 @@ public class AutomatonView {
 
     }
 
+    private void drawCircle(int i){
+        Circle circle = new Circle();
+        double x = 150*Math.cos((i+1)*2*Math.PI/number) + pane.getPrefWidth()/2;
+        double y = 150*Math.sin((i+1)*2*Math.PI/number) + pane.getPrefHeight()/2;
+        circle.setCenterX(x);
+        circle.setCenterY(y);
+        circle.setRadius(radius);
+        circle.setId(String.valueOf(i));
+        circle.setFill(Color.WHITE);
+        circle.setStroke(Color.BLACK);
+        circle.setStrokeWidth(2);
+        //circle.setOnMouseClicked(this::onRightClick);
+        circle.setOnMouseDragged(this::onMouseDragged);
+        circles.add(circle);
+        pane.getChildren().add(circle);
+
+        Label label = new Label();
+        label.setText(String.valueOf(i));
+        label.setFont(Font.font(20));
+        label.setLayoutX(x-radius/5);
+        label.setLayoutY(y-radius/2);
+        label.setId(String.valueOf(i));
+        label.setDisable(true);
+        circleLabels.add(label);
+        pane.getChildren().add(label);
+    }
     //control point Methods are the same operation, they are separated for the sake of comfort
     private double controlPointX(double xFrom, double xTo, double yFrom, double yTo, double labelFactor, int sign){
         return (xTo+xFrom)/2 + radius*labelFactor*sign*(yTo-yFrom)/Math.sqrt(yTo*yTo + yFrom*yFrom);
