@@ -49,7 +49,7 @@ public class AutomatonView {
         this.number = number;
         oldX = (int)pane.getLayoutX();
 
-        automata = new DeterministicFiniteAutomata();
+        automata = new NonDeterministicFiniteAutomata();
         for (int i = 0; i < number; i++) {
             drawCircle(i);
             if(i == 0) automata.addVertex(true, false, String.valueOf(i));
@@ -78,7 +78,13 @@ public class AutomatonView {
         yTo = arrowPointY(xFrom, xTo, yFrom, yTo);
         //remove duplicates in accepted chars of transition
         String chars = removeDuplicates(charsField.getText());
-        drawCurve(xFrom, xTo, yFrom, yTo, idFrom, idTo, chars);
+
+        //if there is no edge drawn - draw one, else combine them graphically
+        if(hasCurve(idFrom, idTo)){
+            combineEdgeLabels(idFrom, idTo, chars);
+        }else{
+            drawCurve(xFrom, xTo, yFrom, yTo, idFrom, idTo, chars);
+        }
 
         automata.getVertexById(idFrom).addEdge(idTo, chars);
 
@@ -130,13 +136,13 @@ public class AutomatonView {
             if (label.getIdFrom() == Integer.parseInt(((Circle)event.getSource()).getId())){
                 double xTo = circles.get(label.getIdTo()).getCenterX();
                 double yTo = circles.get(label.getIdTo()).getCenterY();
-                label.setLayoutX(controlPointX(x, xTo, y, yTo, 1.5, +1));
-                label.setLayoutY(controlPointY(x, xTo, y, yTo, 1.5, -1));
+                label.setLayoutX(controlPointX(x, xTo, y, yTo, 2, +1));
+                label.setLayoutY(controlPointY(x, xTo, y, yTo, 2, -1));
             }else if (label.getIdTo() == Integer.parseInt(((Circle)event.getSource()).getId())){
                 double xFrom = circles.get(label.getIdFrom()).getCenterX();
                 double yFrom = circles.get(label.getIdFrom()).getCenterY();
-                label.setLayoutX(controlPointX(xFrom, x, yFrom, y, 1.5, +1));
-                label.setLayoutY(controlPointY(xFrom, x, yFrom, y, 1.5, -1));
+                label.setLayoutX(controlPointX(xFrom, x, yFrom, y, 2, +1));
+                label.setLayoutY(controlPointY(xFrom, x, yFrom, y, 2, -1));
             }
         }
         //move circle label
@@ -231,8 +237,8 @@ public class AutomatonView {
         label.setIdFrom(idFrom);
         label.setIdTo(idTo);
         label.setText(chars);
-        label.setLayoutX(controlPointX(xFrom, xTo, yFrom, yTo, 1.5, +1));
-        label.setLayoutY(controlPointY(xFrom, xTo, yFrom, yTo, 1.5, -1));
+        label.setLayoutX(controlPointX(xFrom, xTo, yFrom, yTo, 2, +1));
+        label.setLayoutY(controlPointY(xFrom, xTo, yFrom, yTo, 2, -1));
         labels.add(label);
         pane.getChildren().add(label);
     }
@@ -274,6 +280,19 @@ public class AutomatonView {
             }
         }
 
+    }
+    private void combineEdgeLabels(int idFrom, int idTo, String string){
+        for (idLabel label : labels){
+            if (label.getIdFrom() == idFrom && label.getIdTo() == idTo){
+                label.setText(removeDuplicates(label.getText() + string));
+            }
+        }
+    }
+    private boolean hasCurve(int idFrom, int idTo){
+        for (idCurve curve : curves){
+            if(curve.getIdFrom() == idFrom && curve.getIdTo() == idTo) return true;
+        }
+        return false;
     }
     //control point Methods are the same operation, they are separated for the sake of comfort
     private double controlPointX(double xFrom, double xTo, double yFrom, double yTo, double labelFactor, int sign){

@@ -33,7 +33,7 @@ public class DeterministicFiniteAutomata implements FiniteAutomata{
         for (Vertex vertex : vertices){
             if(vertex.getId() == id) return vertex;
         }
-        System.err.println("no such vertex found, returning false vertex with empty String name and id = -1");
+        System.err.println("no such vertex found, returning false vertex with empty String name");
         return new Vertex("");
     }
     @Override

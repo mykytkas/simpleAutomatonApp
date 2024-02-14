@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="76fbf929-07eb-432e-991a-2d9feda06311" name="Changes" comment="added arrowheads to the curves">
+    <list default="true" id="76fbf929-07eb-432e-991a-2d9feda06311" name="Changes" comment="fixed: curves were not redrawn on the to-circle if from-circle was moved">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/AutomatonView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/AutomatonView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/DeterministicFiniteAutomata.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/DeterministicFiniteAutomata.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +98,7 @@
       <workItem from="1707478453205" duration="1761000" />
       <workItem from="1707483152785" duration="320000" />
       <workItem from="1707483744099" duration="29207000" />
-      <workItem from="1707842489123" duration="11860000" />
+      <workItem from="1707842489123" duration="16006000" />
     </task>
     <task id="LOCAL-00001" summary="initialized a project + changed starting fxml">
       <option name="closed" value="true" />
@@ -275,7 +276,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707910409695</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="fixed: curves were not redrawn on the to-circle if from-circle was moved">
+      <option name="closed" value="true" />
+      <created>1707915412268</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1707915412268</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -314,6 +323,7 @@
     <MESSAGE value="implemented: check if the string could be accepted&#10;*important* this version should already function" />
     <MESSAGE value="fixed different curve orientation when dragged" />
     <MESSAGE value="added arrowheads to the curves" />
-    <option name="LAST_COMMIT_MESSAGE" value="added arrowheads to the curves" />
+    <MESSAGE value="fixed: curves were not redrawn on the to-circle if from-circle was moved" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed: curves were not redrawn on the to-circle if from-circle was moved" />
   </component>
 </project>
