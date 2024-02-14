@@ -6,7 +6,6 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.QuadCurve;
@@ -41,6 +40,7 @@ public class AutomatonView {
     private ArrayList<idCurve> curves = new ArrayList<>();
     private ArrayList<idLabel> labels = new ArrayList<>();
     private ArrayList<Label> circleLabels = new ArrayList<>();
+    private ArrayList<Line> arrowheads = new ArrayList<>();
     private int oldX;
     private int oldY;
     final private int radius = 25;
@@ -66,7 +66,7 @@ public class AutomatonView {
 
     @FXML
     protected void addEdge(ActionEvent event){
-        int xFrom, yFrom, xTo, yTo;
+        double xFrom, yFrom, xTo, yTo;
         int idFrom, idTo;
         idFrom = choiceFrom.getValue();
         idTo = choiceTo.getValue();
@@ -74,7 +74,8 @@ public class AutomatonView {
         yFrom = (int)circles.get(idFrom).getCenterY();
         xTo = (int)circles.get(idTo).getCenterX();
         yTo = (int)circles.get(idTo).getCenterY();
-
+        xTo = (int)arrowPointX(xFrom, xTo, yFrom, yTo);
+        yTo = (int)arrowPointY(xFrom, xTo, yFrom, yTo);
         //remove duplicates in accepted chars of transition
         String chars = removeDuplicates(charsField.getText());
         drawCurve(xFrom, xTo, yFrom, yTo, idFrom, idTo, chars);
@@ -104,11 +105,15 @@ public class AutomatonView {
                 curve.setStartY(y);
                 curve.setControlX(controlPointX(x, curve.getEndX(), y, curve.getEndY(),1,+1));
                 curve.setControlY(controlPointY(x, curve.getEndX(), y, curve.getEndY(),1,-1));
+                eraseArrowHead(curve.getId());
             }else if (curve.getIdTo() == Integer.parseInt(((Circle)event.getSource()).getId())){
-                curve.setEndX(x);
-                curve.setEndY(y);
+                curve.setEndX(arrowPointX(circles.get(curve.getIdFrom()).getCenterX(), x,
+                       circles.get(curve.getIdFrom()).getCenterY(), y ));
+                curve.setEndY(arrowPointY(circles.get(curve.getIdFrom()).getCenterX(), x,
+                        circles.get(curve.getIdFrom()).getCenterY(), y ));
                 curve.setControlX(controlPointX(curve.getStartX(), x, curve.getStartY(), y, 1, +1));
                 curve.setControlY(controlPointY(curve.getStartX(), x, curve.getStartY(), y, 1, -1));
+                eraseArrowHead(curve.getId());
             }
         }
         //move curve - label
@@ -135,6 +140,23 @@ public class AutomatonView {
         }
 
     }
+    @FXML
+    protected void onMouseReleased(MouseEvent event){
+        for (idCurve curve : curves){
+            if (curve.getIdTo() == Integer.parseInt(((Circle)event.getSource()).getId()) || curve.getIdFrom() == Integer.parseInt(((Circle)event.getSource()).getId())){
+                double xFrom, yFrom, xTo, yTo;
+
+                xFrom = circles.get(curve.getIdFrom()).getCenterX();
+                yFrom = circles.get(curve.getIdFrom()).getCenterY();
+                xTo = circles.get(curve.getIdTo()).getCenterX();
+                yTo = circles.get(curve.getIdTo()).getCenterY();
+                xTo = arrowPointX(xFrom, xTo, yFrom, yTo);
+                yTo = arrowPointY(xFrom, xTo, yFrom, yTo);
+
+                drawArrowHead(xFrom, xTo, yFrom, yTo, curve.getId());
+            }
+        }
+    }
 
     @FXML
     protected void checkString(ActionEvent event){
@@ -155,10 +177,10 @@ public class AutomatonView {
         circle.setCenterY(y);
         circle.setRadius(radius);
         circle.setId(String.valueOf(i));
-        circle.setFill(Color.WHITE);
+        circle.setFill(Color.TRANSPARENT);
         circle.setStroke(Color.BLACK);
         circle.setStrokeWidth(2);
-        //circle.setOnMouseClicked(this::onRightClick);
+        circle.setOnMouseReleased(this::onMouseReleased);
         circle.setOnMouseDragged(this::onMouseDragged);
         circles.add(circle);
         pane.getChildren().add(circle);
@@ -173,7 +195,7 @@ public class AutomatonView {
         circleLabels.add(label);
         pane.getChildren().add(label);
     }
-    private void drawCurve(int xFrom, int xTo,int yFrom, int yTo, int idFrom, int idTo, String chars){
+    private void drawCurve(double xFrom, double xTo,double yFrom, double yTo, int idFrom, int idTo, String chars){
         //add idCurve
         idCurve curve = new idCurve();
         curve.setIdFrom(idFrom);
@@ -189,10 +211,12 @@ public class AutomatonView {
         curve.setViewOrder(pane.getChildren().size());
         curve.setControlX(controlPointX(xFrom, xTo, yFrom, yTo, 1, +1));
         curve.setControlY(controlPointY(xFrom, xTo, yFrom, yTo, 1, -1));
+        curve.setId(String.valueOf(curves.size()));
 
         curves.add(curve);
         pane.getChildren().add(curve);
 
+        drawArrowHead(xFrom, xTo, yFrom, yTo, curve.getId());
         //add label
         idLabel label = new idLabel();
         label.setIdFrom(idFrom);
@@ -203,12 +227,57 @@ public class AutomatonView {
         labels.add(label);
         pane.getChildren().add(label);
     }
+    private void drawArrowHead(double xFrom, double xTo, double yFrom, double yTo, String curveId){
+        double factorDelta = (20)/Math.hypot(xTo - xFrom, yTo - yFrom);
+
+        double dx = (xTo - xFrom) * factorDelta;
+        double dy = (yTo - yFrom) * factorDelta;
+
+        double ox = dx / 2;
+        double oy = dy / 2;
+
+        Line line1 = new Line();
+        line1.setStartX(xTo);
+        line1.setStartY(yTo);
+        line1.setEndX(xTo + oy - dx);
+        line1.setEndY(yTo - ox - dy);
+        line1.setStrokeWidth(1.5);
+        line1.setId(curveId);
+        arrowheads.add(line1);
+        pane.getChildren().add(line1);
+
+        Line line2 = new Line();
+        line2.setStartX(xTo);
+        line2.setStartY(yTo);
+        line2.setEndX(xTo - oy - dx);
+        line2.setEndY(yTo + ox - dy);
+        line1.setStrokeWidth(1.5);
+        line2.setId(curveId);
+        arrowheads.add(line2);
+        pane.getChildren().add(line2);
+
+    }
+    private void eraseArrowHead(String curveId){
+        for (int i = 0; i < arrowheads.size(); i++){
+            if (arrowheads.get(i).getId().equals(curveId)){
+                pane.getChildren().remove(arrowheads.get(i));
+                arrowheads.remove(arrowheads.get(i));
+            }
+        }
+
+    }
     //control point Methods are the same operation, they are separated for the sake of comfort
     private double controlPointX(double xFrom, double xTo, double yFrom, double yTo, double labelFactor, int sign){
         return (xTo+xFrom)/2 + radius*labelFactor*sign*(yTo-yFrom)/Math.sqrt(yTo*yTo + yFrom*yFrom);
     }
     private double controlPointY(double xFrom, double xTo, double yFrom, double yTo, double labelFactor, int sign){
-        return (yTo+yFrom)/2 + radius*labelFactor*sign*(xTo-xFrom + 0.0)/Math.sqrt(xTo*xTo + xFrom*xFrom);
+        return (yTo+yFrom)/2 + radius*labelFactor*sign*(xTo-xFrom)/Math.sqrt(xTo*xTo + xFrom*xFrom);
+    }
+    private double arrowPointX(double xFrom, double xTo, double yFrom, double yTo){
+        return xTo - radius*(xTo-xFrom)/Math.sqrt((xTo - xFrom)*(xTo - xFrom) + (yTo - yFrom)*(yTo - yFrom));
+    }
+    private double arrowPointY(double xFrom, double xTo, double yFrom, double yTo){
+        return yTo - radius*(yTo-yFrom)/Math.sqrt((xTo - xFrom)*(xTo - xFrom) + (yTo - yFrom)*(yTo - yFrom));
     }
     private String removeDuplicates(String input){
         String out = "";
