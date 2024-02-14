@@ -70,12 +70,12 @@ public class AutomatonView {
         int idFrom, idTo;
         idFrom = choiceFrom.getValue();
         idTo = choiceTo.getValue();
-        xFrom = (int)circles.get(idFrom).getCenterX();
-        yFrom = (int)circles.get(idFrom).getCenterY();
-        xTo = (int)circles.get(idTo).getCenterX();
-        yTo = (int)circles.get(idTo).getCenterY();
-        xTo = (int)arrowPointX(xFrom, xTo, yFrom, yTo);
-        yTo = (int)arrowPointY(xFrom, xTo, yFrom, yTo);
+        xFrom = circles.get(idFrom).getCenterX();
+        yFrom = circles.get(idFrom).getCenterY();
+        xTo = circles.get(idTo).getCenterX();
+        yTo = circles.get(idTo).getCenterY();
+        xTo = arrowPointX(xFrom, xTo, yFrom, yTo);
+        yTo = arrowPointY(xFrom, xTo, yFrom, yTo);
         //remove duplicates in accepted chars of transition
         String chars = removeDuplicates(charsField.getText());
         drawCurve(xFrom, xTo, yFrom, yTo, idFrom, idTo, chars);
@@ -103,16 +103,25 @@ public class AutomatonView {
             if (curve.getIdFrom() == Integer.parseInt(((Circle)event.getSource()).getId())){
                 curve.setStartX(x);
                 curve.setStartY(y);
+
+                curve.setEndX(arrowPointX(x, circles.get(curve.getIdTo()).getCenterX(),
+                        y, circles.get(curve.getIdTo()).getCenterY() ));
+                curve.setEndY(arrowPointY(x, circles.get(curve.getIdTo()).getCenterX(),
+                        y, circles.get(curve.getIdTo()).getCenterY() ));
+
                 curve.setControlX(controlPointX(x, curve.getEndX(), y, curve.getEndY(),1,+1));
                 curve.setControlY(controlPointY(x, curve.getEndX(), y, curve.getEndY(),1,-1));
+
                 eraseArrowHead(curve.getId());
             }else if (curve.getIdTo() == Integer.parseInt(((Circle)event.getSource()).getId())){
                 curve.setEndX(arrowPointX(circles.get(curve.getIdFrom()).getCenterX(), x,
                        circles.get(curve.getIdFrom()).getCenterY(), y ));
                 curve.setEndY(arrowPointY(circles.get(curve.getIdFrom()).getCenterX(), x,
                         circles.get(curve.getIdFrom()).getCenterY(), y ));
+
                 curve.setControlX(controlPointX(curve.getStartX(), x, curve.getStartY(), y, 1, +1));
                 curve.setControlY(controlPointY(curve.getStartX(), x, curve.getStartY(), y, 1, -1));
+
                 eraseArrowHead(curve.getId());
             }
         }
@@ -177,7 +186,7 @@ public class AutomatonView {
         circle.setCenterY(y);
         circle.setRadius(radius);
         circle.setId(String.valueOf(i));
-        circle.setFill(Color.TRANSPARENT);
+        circle.setFill(Color.WHITE);
         circle.setStroke(Color.BLACK);
         circle.setStrokeWidth(2);
         circle.setOnMouseReleased(this::onMouseReleased);
