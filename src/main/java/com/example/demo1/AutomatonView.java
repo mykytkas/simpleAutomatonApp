@@ -1,8 +1,10 @@
 package com.example.demo1;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -53,7 +55,7 @@ public class AutomatonView {
         for (int i = 0; i < number; i++) {
             drawCircle(i);
             if(i == 0) automata.addVertex(true, false, String.valueOf(i));
-            else automata.addVertex(false, true, String.valueOf(i));
+            else automata.addVertex(false, false, String.valueOf(i));
         }
         for (int i = 0; i < circles.size(); i++){
             choiceTo.getItems().add(i);
@@ -198,6 +200,31 @@ public class AutomatonView {
         label.setDisable(true);
         circleLabels.add(label);
         pane.getChildren().add(label);
+
+        ContextMenu contextMenu = new ContextMenu();
+        MenuItem setEnd = new MenuItem();
+        setEnd.setText("set End");
+        setEnd.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                automata.getVertexById(i).setEnd();
+            }
+        });
+        MenuItem unsetEnd = new MenuItem();
+        unsetEnd.setText("unset End");
+        unsetEnd.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                automata.getVertexById(i).unsetEnd();
+            }
+        });
+        contextMenu.getItems().addAll(setEnd, unsetEnd);
+        circle.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
+            @Override
+            public void handle(ContextMenuEvent contextMenuEvent) {
+                contextMenu.show(circle,pane.localToScreen(pane.getBoundsInLocal()).getMinX() + x,pane.localToScreen(pane.getBoundsInLocal()).getMinY() + y);
+            }
+        });
     }
     private void drawCurve(double xFrom, double xTo,double yFrom, double yTo, int idFrom, int idTo, String chars){
         //add idCurve

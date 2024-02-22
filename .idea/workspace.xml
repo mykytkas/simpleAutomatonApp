@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="76fbf929-07eb-432e-991a-2d9feda06311" name="Changes" comment="fixed: now doesn't draw duplicate curves&#10;&#10;+ now uses NondeterministicFiniteAutomata as default">
+    <list default="true" id="76fbf929-07eb-432e-991a-2d9feda06311" name="Changes" comment="added: now draws an arrow pointing to the start node (arrowhead stays visible when dragged)&#10;refactored: relocation of curves(when dragged) are now moved to separate methods">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/AutomatonView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/AutomatonView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/Vertex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/Vertex.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +99,7 @@
       <workItem from="1707483152785" duration="320000" />
       <workItem from="1707483744099" duration="29207000" />
       <workItem from="1707842489123" duration="17481000" />
-      <workItem from="1708592373361" duration="6444000" />
+      <workItem from="1708592373361" duration="11655000" />
     </task>
     <task id="LOCAL-00001" summary="initialized a project + changed starting fxml">
       <option name="closed" value="true" />
@@ -292,7 +293,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707924960605</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="added: now draws an arrow pointing to the start node (arrowhead stays visible when dragged)&#10;refactored: relocation of curves(when dragged) are now moved to separate methods">
+      <option name="closed" value="true" />
+      <created>1708599081661</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1708599081661</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -333,6 +342,7 @@
     <MESSAGE value="added arrowheads to the curves" />
     <MESSAGE value="fixed: curves were not redrawn on the to-circle if from-circle was moved" />
     <MESSAGE value="fixed: now doesn't draw duplicate curves&#10;&#10;+ now uses NondeterministicFiniteAutomata as default" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed: now doesn't draw duplicate curves&#10;&#10;+ now uses NondeterministicFiniteAutomata as default" />
+    <MESSAGE value="added: now draws an arrow pointing to the start node (arrowhead stays visible when dragged)&#10;refactored: relocation of curves(when dragged) are now moved to separate methods" />
+    <option name="LAST_COMMIT_MESSAGE" value="added: now draws an arrow pointing to the start node (arrowhead stays visible when dragged)&#10;refactored: relocation of curves(when dragged) are now moved to separate methods" />
   </component>
 </project>

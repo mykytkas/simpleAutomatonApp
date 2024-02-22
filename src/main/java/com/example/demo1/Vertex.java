@@ -44,6 +44,8 @@ public class Vertex {
     public boolean isEnd() {
         return end;
     }
+    public void setEnd(){end = true;}
+    public void unsetEnd(){end = false;}
 
     public String getName() {
         return name;
