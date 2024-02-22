@@ -95,40 +95,25 @@ public class AutomatonView {
     protected void onMouseDragged(MouseEvent event) {
         //move circles
         int x = (int)event.getSceneX() - oldX;
-        if (event.getSceneX() < pane.getPrefWidth() + pane.getLayoutX() - radius && event.getSceneX() > pane.getLayoutX() + radius){
+        if (event.getSceneX() < pane.getWidth() + pane.getLayoutX() - radius && event.getSceneX() > pane.getLayoutX() + radius){
             ((Circle)event.getSource()).setCenterX(x);
 
         }
         int y = (int)event.getSceneY() - oldY;
-        if (event.getSceneY() < pane.getPrefHeight() - radius && event.getSceneY() > radius){
+        if (event.getSceneY() < pane.getHeight() - radius && event.getSceneY() > radius){
             ((Circle)event.getSource()).setCenterY(y);
 
         }
         //move attached curves
         for (idCurve curve : curves){
-            if (curve.getIdFrom() == Integer.parseInt(((Circle)event.getSource()).getId())){
-                curve.setStartX(x);
-                curve.setStartY(y);
-
-                curve.setEndX(arrowPointX(x, circles.get(curve.getIdTo()).getCenterX(),
-                        y, circles.get(curve.getIdTo()).getCenterY() ));
-                curve.setEndY(arrowPointY(x, circles.get(curve.getIdTo()).getCenterX(),
-                        y, circles.get(curve.getIdTo()).getCenterY() ));
-
-                curve.setControlX(controlPointX(x, curve.getEndX(), y, curve.getEndY(),1,+1));
-                curve.setControlY(controlPointY(x, curve.getEndX(), y, curve.getEndY(),1,-1));
-
-                eraseArrowHead(curve.getId());
-            }else if (curve.getIdTo() == Integer.parseInt(((Circle)event.getSource()).getId())){
-                curve.setEndX(arrowPointX(circles.get(curve.getIdFrom()).getCenterX(), x,
-                       circles.get(curve.getIdFrom()).getCenterY(), y ));
-                curve.setEndY(arrowPointY(circles.get(curve.getIdFrom()).getCenterX(), x,
-                        circles.get(curve.getIdFrom()).getCenterY(), y ));
-
-                curve.setControlX(controlPointX(curve.getStartX(), x, curve.getStartY(), y, 1, +1));
-                curve.setControlY(controlPointY(curve.getStartX(), x, curve.getStartY(), y, 1, -1));
-
-                eraseArrowHead(curve.getId());
+            if(curve.getIdTo() == 0 && curve.getIdFrom() == 0){
+                dragStartArrowCurve(curve);
+            }
+            else if (curve.getIdFrom() == Integer.parseInt(((Circle)event.getSource()).getId())){
+                dragCurveFrom(curve, x, y);
+            }
+            else if (curve.getIdTo() == Integer.parseInt(((Circle)event.getSource()).getId())){
+                dragCurveTo(curve, x, y);
             }
         }
         //move curve - label
@@ -199,6 +184,10 @@ public class AutomatonView {
         circle.setOnMouseDragged(this::onMouseDragged);
         circles.add(circle);
         pane.getChildren().add(circle);
+
+        if (i == 0){
+            drawStartArrowCurve(x, y, 0);
+        }
 
         Label label = new Label();
         label.setText(String.valueOf(i));
@@ -271,6 +260,74 @@ public class AutomatonView {
         arrowheads.add(line2);
         pane.getChildren().add(line2);
 
+    }
+    private void drawStartArrowCurve(double xTo,double yTo, int idStart){
+
+        //get vector from circle to the center
+        double paneMiddleX = pane.getWidth() /2;
+        double paneMiddleY = pane.getHeight() /2;
+        //get vector v for the arrow
+        double vX = 3 * radius * (paneMiddleX - xTo) / Math.hypot(paneMiddleX - xTo, paneMiddleY - yTo);
+        double vY = 3 * radius * (paneMiddleY - yTo) / Math.hypot(paneMiddleX - xTo, paneMiddleY - yTo);
+        // get xFrom yFrom
+        double xFrom = xTo - vX;
+        double yFrom = yTo - vY;
+        // adjust xTo, yTo
+        xTo = arrowPointX(xFrom, xTo, yFrom, yTo);
+        yTo = arrowPointY(xFrom, xTo, yFrom, yTo);
+
+        drawCurve(xFrom, xTo, yFrom, yTo, idStart,idStart, "");
+    }
+    private void dragStartArrowCurve(idCurve curve){
+        double xTo = circles.get(0).getCenterX();
+        double yTo = circles.get(0).getCenterY();
+        //get vector from circle to the center
+        double paneMiddleX = pane.getWidth() /2;
+        double paneMiddleY = pane.getHeight() /2;
+        //get vector v for the arrow
+        double vX = 3 * radius * (paneMiddleX - xTo) / Math.hypot(paneMiddleX - xTo, paneMiddleY - yTo);
+        double vY = 3 * radius * (paneMiddleY - yTo) / Math.hypot(paneMiddleX - xTo, paneMiddleY - yTo);
+        // get xFrom yFrom
+        double xFrom = xTo - vX;
+        double yFrom = yTo - vY;
+        curve.setStartX(xFrom);
+        curve.setStartY(yFrom);
+        // adjust xTo, yTo
+        curve.setEndX(arrowPointX(xFrom, xTo, yFrom, yTo));
+        curve.setEndY(arrowPointY(xFrom, xTo, yFrom, yTo));
+
+        curve.setControlX((curve.getStartX() + curve.getEndX() )/2);
+        curve.setControlY((curve.getStartY() + curve.getEndY() )/2);
+
+        eraseArrowHead(curve.getId());
+        eraseArrowHead(curve.getId());
+        drawArrowHead(curve.getStartX(), curve.getEndX(), curve.getStartY(), curve.getEndY(), curve.getId());
+
+    }
+    private void dragCurveFrom(idCurve curve, double x, double y){
+        curve.setStartX(x);
+        curve.setStartY(y);
+
+        curve.setEndX(arrowPointX(x, circles.get(curve.getIdTo()).getCenterX(),
+                y, circles.get(curve.getIdTo()).getCenterY() ));
+        curve.setEndY(arrowPointY(x, circles.get(curve.getIdTo()).getCenterX(),
+                y, circles.get(curve.getIdTo()).getCenterY() ));
+
+        curve.setControlX(controlPointX(x, curve.getEndX(), y, curve.getEndY(),1,+1));
+        curve.setControlY(controlPointY(x, curve.getEndX(), y, curve.getEndY(),1,-1));
+
+        eraseArrowHead(curve.getId());
+    }
+    private void dragCurveTo(idCurve curve, double x, double y){
+        curve.setEndX(arrowPointX(circles.get(curve.getIdFrom()).getCenterX(), x,
+                circles.get(curve.getIdFrom()).getCenterY(), y ));
+        curve.setEndY(arrowPointY(circles.get(curve.getIdFrom()).getCenterX(), x,
+                circles.get(curve.getIdFrom()).getCenterY(), y ));
+
+        curve.setControlX(controlPointX(curve.getStartX(), x, curve.getStartY(), y, 1, +1));
+        curve.setControlY(controlPointY(curve.getStartX(), x, curve.getStartY(), y, 1, -1));
+
+        eraseArrowHead(curve.getId());
     }
     private void eraseArrowHead(String curveId){
         for (int i = 0; i < arrowheads.size(); i++){
